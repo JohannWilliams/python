@@ -19,13 +19,39 @@ create functions dealing with math problems.
 
 """
 
+"""
 # function to ask for an input as a number from user
 def get_num():
     print("Enter a number")
     return input()
+"""
+
+# update get_num to check for int float or complex numbers. 
+# if no number is found keep asking.
+def get_num():
+    num_entered = False
+    x = 0
+    while(not num_entered):
+        x = input("Enter a number: ")
+        try:
+            x = int(x)
+            num_entered = True
+        except:
+            try:
+                x = float(x)
+                num_entered = True
+            except:
+                try:
+                    x = complex(x)
+                    num_entered = True
+                except:
+                    print("Input is not a number. Try again.")
+
+    return x
+
 
 # call get_num
-# print(get_num())
+print(get_num())
 
 # sum of 2 numbers
 def add_two(a, b):
@@ -59,11 +85,21 @@ def multi(a, b):
 # call multi
 print(f"{x} x {y} = {multi(x, y)}")
 
+"""
 # divide 2 numbers
 def divi(a, b):
     return a/b
+"""
+
+# new divide 2 numbers check for /0
+def divi(a, b):
+    try:
+        return a/b
+    except ZeroDivisionError:
+        return "Cannot Divide By Zero!"
 
 # call divi
 # will return float unless casted to int
 print(f"{z} / {x} = {divi(z, x)}")
 print(f"{z} / {x} = {int(divi(z, x))}")
+print(f"{x} / {0} = {divi(x, 0)}") # cannot div by 0
